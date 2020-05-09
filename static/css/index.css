@@ -135,7 +135,7 @@ img{
 /*4. 主体信息*/
 #main{
 	margin-top: 25px;
-	overflow:hidden;
+	/*overflow:hidden;*/
 }
 #main .goodsClass{
 	border-top: 1px solid #ccc;
