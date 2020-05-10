@@ -30,6 +30,7 @@ class GoodsType(models.Model):
   def to_dict(self):
     dic = {
       'title':self.title,
+      # 强制转换为字符串
       'picture':self.picture.__str__(),
       'desc':self.desc,
     }
