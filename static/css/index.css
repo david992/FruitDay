@@ -190,6 +190,18 @@ img{
 
 #footer{
 	height:100px;
-	background: red;
+	border-top: 3px orange solid;
 }
 
+.link{
+	width: 400px;
+	height: 30px;
+	margin: auto;
+	text-align: center;
+}
+.power{
+	width: 400px;
+	height: 30px;
+	margin: auto;
+	text-align: center;
+}
