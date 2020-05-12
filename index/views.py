@@ -115,7 +115,6 @@ def check_uphone_views(request):
   return HttpResponse(json.dumps(dic))
 
 
-
 def index_views(request):
   return render(request,'index.html')
 
@@ -158,12 +157,16 @@ def type_goods_views(request):
   all_list = []
   #加载所有的商品类型
   types = GoodsType.objects.all()
+  # print(types)
   for type in types:
     type_json = json.dumps(type.to_dict())
+    # print(type_json)
     #获取type类型下的最新的10条数据
     g_list = type.goods_set.filter(isActive=True).order_by("-id")[0:10]
+    # print(g_list)
     #将g_list转换为json
     g_list_json=serializers.serialize('json',g_list)
+    # print(g_list_json)
     #将type_json和g_list_json封装到一个字典中
     dic = {
       "type":type_json,
@@ -203,26 +206,30 @@ def add_cart_views(request):
     }
   return HttpResponse(json.dumps(dic))
 
+def cart_views(request):
+  return render(request,'cart.html')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def cartserver_views(request):
+  if "uid" in request.session and'uphone' in request.session:
+    all_list = []
+    uid = request.session['uid']
+    goods = CartInfo.objects.filter(user=uid).all()
+    print(goods)
+    for i in goods:
+      good = Goods.objects.filter(title=i).all()
+      good_list = serializers.serialize('json', good)
+      # cc = CartInfo.objects.filter(goods=good).all()
+      # print(cc)
+      dic = {
+        # "good":cc,
+        "good_list": good_list,
+      }
+      # 将dic字典追加到all_list中
+      all_list.append(dic)
+    print(all_list)
+    return HttpResponse(json.dumps(all_list))
+  else:
+    return redirect('/login')
 
 def test_views(request):
   return render(request,'test.html')

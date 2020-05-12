@@ -72,16 +72,40 @@ function check_login(){
 		$("#login").html(html);
 	},'json');
 }
+// function mycart(){
+//   $.get('/cart/',function(data){
+//       var html = "";
+//       html += "<a href='javascript:cart();'>我的购物车</a>"
+// 	  // html += "<a href='/cart'>我的购物车</a>"
+//     $("#cart").html(html);
+//   },'json');
+// }
+// function cart(){
+//   $.get('/cart/',function (data) {
+//     console.log(data);
+//     var show = "";
+//     $.each(data,function (i,good) {
+//       show += " <div class='g-item'>";
+//       show += " <p class='check-box'>";
+//       show += "<img src='/"+good.picture+ "width='80'></p>";
+//
+//       show += "</div>";
+//     });
+//     $("#good-content").html(show);
+//   },'json');
+// }
 
 /**加载所有的商品分类以及商品信息(每个分类取前10个)*/
 function loadGoods(){
 	$.get('/load_type_goods/',function(data){
+		console.log(data);
 		//data 就是响应回来的JSON对象
 		var show = "";
 		$.each(data,function(i,obj){
 			//从obj中取出type,并转换为json对象
 			var jsonType = JSON.parse(obj.type);
-
+				console.log(typeof jsonType)
+				console.log(jsonType);
 			show+="<div class='item' style='overflow:hidden;'>";
 				//加载type的信息
 				show+="<p class='goodsClass'>";
@@ -91,6 +115,7 @@ function loadGoods(){
 				//加载ul以及li们
 				show+="<ul>";
 					var jsonGoods = JSON.parse(obj.goods);
+					console.log(jsonGoods);
 					$.each(jsonGoods,function(i,good){
 						//创建li
 						show+="<li ";
@@ -132,11 +157,7 @@ function add_cart(gid){
 			alert('请先登录再购买商品...');
 		}else{
 			//2.将商品保存进购物车
-			$.get(
-				'/add_cart/',
-				{
-					'gid':gid
-				},function(data){
+			$.get('/add_cart/', {'gid':gid},function(data){
 					if(data.status == 1){
 						alert(data.statusText);
 					}else{
@@ -153,4 +174,5 @@ $(function(){
 	check_login();
 	/*调用loadGoods函数得到所有的类型和商品*/
 	loadGoods();
+	// mycart()
 });

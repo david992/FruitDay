@@ -1,6 +1,4 @@
-/**
- * Created by tarena on 18-10-22.
- */
+
 $(function(){
   //表示手机号是否已经被注册过的状态值
   // var registStatus = 1;

@@ -53,7 +53,15 @@ class Goods(models.Model):
 
   def __str__(self):
     return self.title
-
+  def to_dict(self):
+    dic = {
+      'title':self.title,
+      # 强制转换为字符串
+      'picture':self.picture.__str__(),
+      'spec':self.spec,
+      'price': self.price,
+    }
+    return dic
   class Meta:
     db_table = "goods"
     verbose_name = "商品"
@@ -65,8 +73,15 @@ class CartInfo(models.Model):
   ccount = models.IntegerField(db_column='ccount')
 
   def __str__(self):
-    return self.ccount
-
+    return str(self.goods)
+  def to_dict(self):
+    dic = {
+      'user':self.user,
+      # 强制转换为字符串
+      'goods':self.goods,
+      'ccount':self.ccount,
+    }
+    return dic
   class Meta:
     db_table = 'cart_info'
 
