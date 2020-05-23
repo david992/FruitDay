@@ -4,7 +4,7 @@ window.onload = function (){
 	//1. 获取元素节点
 	var currentAddr = document.getElementsByClassName('currentAddress')[0];
 	var select = document.getElementsByClassName('select')[0];
-	
+
 	//获取内层列表中地址项
 	var address = select.children;
 	//为每一项添加点击事件
@@ -95,6 +95,29 @@ function check_login(){
 //   },'json');
 // }
 
+/**
+ * 添加商品到购物车
+ * gid : 表示要添加到购物车的商品的ID
+ * */
+function add_cart(gid){
+	//1.验证登录账户，如果没有用户登录的话则给出相应的提示
+	$.get('/check_login/',function(data){
+		if(data.loginStatus == 0){
+			alert('请先登录再购买商品...');
+		}else{
+			//2.将商品保存进购物车
+			$.get('/add_cart/', {'gid':gid},function(data){
+					if(data.status == 1){
+						alert(data.statusText);
+					}else{
+						alert('添加购物车失败');
+					}
+				},'json');
+		}
+	},'json');
+
+}
+
 /**加载所有的商品分类以及商品信息(每个分类取前10个)*/
 function loadGoods(){
 	$.get('/load_type_goods/',function(data){
@@ -146,28 +169,6 @@ function loadGoods(){
 	},'json');
 }
 
-/**
- * 添加商品到购物车
- * gid : 表示要添加到购物车的商品的ID
- * */
-function add_cart(gid){
-	//1.验证登录账户，如果没有用户登录的话则给出相应的提示
-	$.get('/check_login/',function(data){
-		if(data.loginStatus == 0){
-			alert('请先登录再购买商品...');
-		}else{
-			//2.将商品保存进购物车
-			$.get('/add_cart/', {'gid':gid},function(data){
-					if(data.status == 1){
-						alert(data.statusText);
-					}else{
-						alert('添加购物车失败');
-					}
-				},'json');
-		}
-	},'json');
-
-}
 
 $(function(){
 	/*调用check_login检查登录状态*/

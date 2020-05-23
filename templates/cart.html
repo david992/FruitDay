@@ -41,12 +41,23 @@
 			<!-- 1.2.2 满百包邮 -->
 			<a>满百包邮(环郊内)</a>
 			<!-- 1.2.3 星夜达 -->
-			<a href="#" class="xing">星夜达</a>
+			<a href="#" class="xing">次日达</a>
 		</div>
 		<!-- 2、LOGO 和 热门搜索 -->
 		<!-- 3、BANNER广告(横幅广告) -->
 		<div id="banner">
-			<img src="/static/img/banner1.jpg">
+{#			<img src="/static/img/banner1.jpg">#}
+<!-- 图片轮播-->
+			<div class="wrapper">
+				<img src="/static/img/banner1.jpg">
+				<img src="/static/img/banner2.jpg">
+				<img src="/static/img/banner3.jpg">
+			</div>
+			<ul class="imgNav">
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+			</ul>
 		</div>
 		<!-- 4、四幅小广告 -->
 		<ul id="adv-img">
@@ -123,8 +134,8 @@
       <div style="width: 990px;height: 30px;">
           <p style="text-align: center;"><input  type="button" value="结算"></p>
       </div>
-      <div id="footer">
-            <div class="link">
+      <div id="footer" style="height:100px;border-top: 3px orange solid;">
+            <div class="foot_link">
                 <a href="">配送说明&nbsp;&nbsp;| </a>
                 <a href="">&nbsp;&nbsp;关于我们</a>
             </div>
